@@ -42,8 +42,6 @@ class VectorStore:
         index.add(np.array(embeddings))
         self.paper_indexes[paper_id] = (index, text_chunks, meta)
     
-    import numpy as np
-
     def query(self, query_text, paper, top_k=1):
         paper_id = "temp"
         sections = paper["sections"]
