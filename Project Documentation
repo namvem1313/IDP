@@ -1,0 +1,116 @@
+# Intelligent Document Processing Agent - Project Report
+
+## 1. Architecture and Approach Used
+
+The system follows a modular, extensible architecture designed for research document understanding at scale. The primary components include:
+
+* **Streamlit Frontend**: Enables user interactions for uploading, querying, and comparing research papers.
+* **PDF Ingestion Layer**: Parses uploaded PDFs into structured JSON with metadata, hierarchical sections, tables, and figures.
+* **Document Store**: An in-memory dictionary that manages parsed paper content, enabling fast access and manipulation.
+* **Query Engine**: Performs summarization, metric extraction, section comparison, and other tasks on stored documents.
+* **Vector Store**: Supports semantic search using SentenceTransformer embeddings and FAISS for vector similarity.
+
+This decoupled architecture allows for seamless extension and future scaling without disrupting core logic.
+
+## 2. Steps for Information Extraction and Query Processing
+
+### Information Extraction Pipeline
+
+1. **Upload PDFs** via Streamlit.
+2. **Parse PDFs** using `pdf_parser.py` and `figures.py`:
+
+   * Extracts metadata (title, authors, DOI, abstract).
+   * Parses nested sections and sub-sections using rule-based hierarchy extraction.
+   * Extracts tables as 2D arrays and figures as byte-encoded PNGs.
+3. **Save JSON Output** for each paper with clean schema: `{metadata, sections, figures, tables}`.
+
+### Query Processing Pipeline
+
+* **Direct Section Lookup**: User can select any nested section or metadata key and view its value.
+* **Compare Sections Between Papers**: Selects sections from two papers and compares them using a summarization model (BART).
+* **Summarization**: Aggregates all sections and generates a short summary using a pretrained transformer.
+* **Evaluation Metric Extraction**: Uses regex over structured text to extract numeric metrics like accuracy, precision.
+* **Semantic Q\&A**: Vector search on paper chunks; optionally followed by LLM answer generation.
+* **Cross-Paper Search**: FAISS-based vector similarity search retrieves the most relevant paragraphs across papers.
+
+## 3. Challenges Faced and Solutions Implemented
+
+| Challenge                       | Solution                                                                                     |
+| ------------------------------- | -------------------------------------------------------------------------------------------- |
+| Inconsistent section hierarchy  | Recursive flattening + breadcrumb keys for dropdowns                                         |
+| Image extraction from PDFs      | Used `PyMuPDF` to extract and render as PNG via PIL                                          |
+| Proper table display            | Converted tables to 2D arrays and displayed using `st.table()`                               |
+| Handling malformed PDFs         | Added try-except blocks and user feedback mechanisms                                         |
+| Token limit for summarization   | Truncated prompts to 3000 characters and used summarization model with length tuning         |
+| Vector search not matching well | Tuned model choice to `all-MiniLM-L6-v2` and chunk sizes for balance of performance and cost |
+
+## 4. Setup and Running Instructions
+
+### Requirements
+
+* Python 3.8+
+* Packages: `streamlit`, `PyMuPDF`, `transformers`, `sentence-transformers`, `faiss`, `numpy`, `pandas`, `PIL`
+
+### Installation
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### Run the App
+
+```bash
+streamlit run app.py
+```
+
+### Folder Structure
+
+```
+├── app.py               # Streamlit interface
+├── pdf_parser.py        # Section, table, metadata extraction
+├── figures.py           # Extracts images from PDF pages
+├── document_store.py    # Manages paper metadata and text
+├── query_engine.py      # Summarization, comparison, metrics
+├── vector_store.py      # Embedding, indexing, semantic search
+├── pdf_ingestion.py     # JSON serialization module
+├── data/                # Extracted paper JSONs
+```
+
+## 5. Future Improvements and Scalability Plan
+
+### System Scalability
+
+* **Move to Cloud Storage**: Replace local file storage with Amazon S3 or Google Cloud Storage.
+* **Async Task Queue**: Use Celery with Redis or RabbitMQ to parallelize document ingestion.
+* **Batch Embedding and Indexing**: Avoid repeated embeddings; persist indexes in Redis or disk.
+* **Containerization & Orchestration**:
+
+  * Use Docker for deployment.
+  * Kubernetes for horizontal scaling in production.
+  * Auto-scale workers based on PDF size and load.
+
+### Enhanced LLM Capabilities
+
+* Swap local summarization models with GPT-4, Claude, or Mistral.
+* Integrate Retrieval-Augmented Generation (RAG) using chunked semantic search and generation.
+* Pre-cache common questions and metadata summaries.
+
+### UI/UX Enhancements
+
+* Improve dropdown navigation with breadcrumbs.
+* Add bulk actions: compare N papers, export summaries.
+* Enable markdown/CSV export for any content block.
+* Show figures in carousel and tables as editable grids.
+
+### Advanced Features
+
+* Scientific entity recognition (e.g., genes, datasets).
+* Evaluation metric comparison dashboard.
+* Paper similarity network or visual citation mapping.
+* Prompt customization for section-level LLMs.
+
+---
+
+Let me know if you'd like this turned into a README, technical whitepaper, or presented as an academic-style research agent overview.

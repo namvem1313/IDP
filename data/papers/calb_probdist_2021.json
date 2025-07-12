@@ -1,0 +1,90 @@
+{
+  "paper_id": "tmpvbqr2miu",
+  "title": "See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/357051016",
+  "authors": [
+    "See discussions",
+    "stats",
+    "and author profiles for this publication at: https://www.researchgate.net/publication/357051016"
+  ],
+  "doi": "10.13140/RG.2.2.26146.35522",
+  "sections": {
+    "sections": {
+      "abstract": "A probabilistic alternative to the Gower distance is proposed. The probabilistic distance enables the realization of a generic deodata predictor. Keywords: Gower distance, mixed data 1",
+      "introduction": "The Gower distance is a popular measure used with mixed data, data sets with both quantitative and categorical attributes. The distance is a real number varying between zero (identical) and one (maximally dissimilar). The Gower distance is a complement to the Gower similarity coefficient [1]. Its value is one minus the Gower similarity coefficient. In article \"Collapsing the Decision Tree: The Concurrent Data Predictor\" [2], a set of predictive algorithms are introduced, also referred to as \"deodata\" predictors. The article's focus is on data with categorical attributes. A suggestion for a continuous counterpart of the algorithms reads: \"A continuous implementation uses attributes that represent continuous (numerical) variables. As such, the match column score cannot be a binary value anymore; a continuous number is more adequate. One possibility is to normalize the attribute values of the column and estimate the distance between the two compared values as a function of the standard deviation separating them\" [2, p.12]. The Gower distance, although not a function of standard deviation, satisfies the requirement of being limited to the [0, 1] interval. The limits of the interval correspond to the discrete matching possibilities. Therefore, for continuous attributes, the Gower similarity coefficient could be used as the \"match column score\" described in [2]. 2 Probabilistic Distance The implementation of a continuous counterpart to the binary match column score can be achieved by means of a probabilistic distance. The probabilistic distance introduced herein quantifies the probability that the outcome of a random variable can occur in the interval delimited by the two compared values. © 2021 Cristian Alb ALB The probabilistic distance assumes that the attribute values are outcomes of a random variable. Presuming that the underlying probability distribution function of the attribute value is known, the probabilistic distance can be thought of as the area beneath the probability distribution graph in the interval delimited by the two compared values as shown in Fig. 1. d (x1, x2) := P(x1≤X ≤x2) = ∣ CDF (x1)−CDF ( x2) ∣ (1) The value of such a probabilistic distance is constrained to the interval [0,1] due to the very nature of probability distribution functions. If the probability distribution of an attribute is not known, a normal/Gaussian distribution can be assumed. The mean and variance of the normal distribution can be estimated from the training data set. The values of the attribute can be scaled to a z-score. The Gauss error function can then be used to compute the probabilistic distance. It consists in half of the absolute difference between the outputs of the error function that correspond to the two compared values. d (x1, x2) := Φ( x2−μ σ ) − Φ( x1−μ σ ) = 1 2 ∣ erf ( x1−μ σ )−erf ( x2−μ σ ) ∣ (2) Being based on the concept of probability, the distance should provide a better indication of the degree of closeness between two compared values. If outlier values can be a concern for the Gower distance, the probabilistic distance should be immune to such issues by design. The original Gower distance has been adapted to process ordinal attributes [3]. The treatment of ordinal attributes is straightforward with the probabilistic distance: the ordinal outcomes can be arranged into bins. After scaling, the bin representation approximates a probability mass function 2 p(x) x x2 x1 Figure 1: Area corresponding to the probabilistic distance between two values of a PDF PROBABILISTIC ALTERNATIVE TO THE GOWER DISTANCE as shown in Fig. 2. The probabilistic distance is derived again as the probability of outcomes in the interval corresponding to the two compared outcomes. Other variations can be derived from this concept. A simple modification consists in raising the above probability distance to a power. The weight of the distance can be increased or decreased by varying the power to above or below unity: d A(x1 , x2) := d 2(x1 , x2) (3) or: d B( x1 , x2) := √d (x1 , x2) (4) The probabilistic distance was conceived as a solution to a classification problem. However, as the Gower distance, it can be used for other applications, for instance, clustering.",
+      "references": "[1] Gower, J. C. (1971). A general coefficient of similarity and some of its properties. Biometrics, 857-871. [2] Alb, C. (2021). Collapsing the Decision Tree: the Concurrent Data Predictor. arXiv preprint arXiv:2108.03887. https://doi.org/10.13140/RG.2.2.33413.06880 [3] Podani, J. (1999). Extending Gower's general coefficient of similarity to ordinal characters. Taxon, 48(2), 331-340. 3 c2 c1 p(x) Figure 2: Area corresponding to the probabilistic distance between two ordinal outcomes View publication stats"
+    },
+    "abstract": "A probabilistic alternative to the Gower distance is proposed. The probabilistic distance enables the realization of a generic deodata predictor. Keywords: Gower distance, mixed data 1"
+  },
+  "figures": [
+    {
+      "page": 1,
+      "name": "figure_1_1.png",
+      "image_bytes": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAYGBgYHBgcICAcKCwoLCg8ODAwODxYQERAREBYiFRkVFRkVIh4kHhweJB42KiYmKjY+NDI0PkxERExfWl98fKcBBgYGBgcGBwgIBwoLCgsKDw4MDA4PFhAREBEQFiIVGRUVGRUiHiQeHB4kHjYqJiYqNj40MjQ+TERETF9aX3x8p//CABEIADIAMgMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAAAwQFAQIH/9oACAEBAAAAAPqg5kpzr+qokC/P7bEDnTXZxZ48sTXnXRAX5WnEBYj/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAv/aAAgBAhAAAACwAB//xAAVAQEBAAAAAAAAAAAAAAAAAAAAAv/aAAgBAxAAAACAAB//xAAyEAACAQIDBAcHBQAAAAAAAAABAgMABBESITFBUXEFEBMgIjJhFDM1UnOBkTRykqGy/9oACAEBAAE/AK1qG3uJyVhjdyNuGwczU1leQIXkhYJvYHMPuQTWta1rxPVbQGe4jizZQT4m4KNSanuTMAieCBfdxDYBxPEmoZZYHzwuUb02fcb6uUjyw3EShUlBxQbEdTgwHpw7nRozXeTfJFJGOZU0uwdUgy9HWgO15pXHIYL3Lb2jtUe3ieR0YMAqk6rxq/tTbTk5CsUhzpjuLalD6qaiikmkWKJcXY6DcPU+gq/jmSVV7GQQQxiONyNGA2tiNNTW3qgSNIJbmWMPhL2caHylsMSW4gCpby7lGVpmCbkTwJ+FqC4lgzCMjK3mRgGVuYNSXs8kbRgRxo3mWNAgbnhqahnng1hmdP2nAUGF4k2aNBOkZkV0GXOF2hgN9fipvDYWS/NJO/8AYXu9GfELcfMWT+SkVkq6/T2H0W/2e70d8RtfrLT+duZr/8QAFBEBAAAAAAAAAAAAAAAAAAAAQP/aAAgBAgEBPwAH/8QAFBEBAAAAAAAAAAAAAAAAAAAAQP/aAAgBAwEBPwAH/9k="
+    }
+  ],
+  "tables": [
+    {
+      "page": 1,
+      "table": [
+        [
+          "See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/357051016\nProbabilistic Alternative to the Gower Distance: A Note on Deodata Predictors\nPreprint · November 2021\nDOI: 10.13140/RG.2.2.26146.35522\nCITATIONS READS\n2 520\n1 author:\nCristian Alb\nIndependent Research\n6 PUBLICATIONS 10 CITATIONS\nSEE PROFILE",
+          null
+        ],
+        [
+          "All content following this page was uploaded by Cristian Alb on 15 December 2021.\nThe user has requested enhancement of the downloaded file.",
+          ""
+        ]
+      ]
+    },
+    {
+      "page": 3,
+      "table": [
+        [
+          "ALB\nThe probabilistic distance assumes that the attribute values are outcomes of a random\nvariable. Presuming that the underlying probability distribution function of the attribute value is\nknown, the probabilistic distance can be thought of as the area beneath the probability distribution\ngraph in the interval delimited by the two compared values as shown in Fig. 1.",
+          null,
+          null
+        ],
+        [
+          "",
+          "p(x)\nx\nx1 x2",
+          ""
+        ],
+        [
+          null,
+          "Figure 1: Area corresponding to the probabilistic distance between two values of a\nPDF",
+          null
+        ],
+        [
+          "d(x ,x ) := P(x ≤X≤x )\n1 2 1 2\n= ∣ CDF(x )−CDF(x ) ∣\n1 2 (1)\nThe value of such a probabilistic distance is constrained to the interval [0,1] due to the very\nnature of probability distribution functions.\nIf the probability distribution of an attribute is not known, a normal/Gaussian distribution can\nbe assumed. The mean and variance of the normal distribution can be estimated from the training\ndata set. The values of the attribute can be scaled to a z-score. The Gauss error function can then\nbe used to compute the probabilistic distance. It consists in half of the absolute difference\nbetween the outputs of the error function that correspond to the two compared values.\nx −μ x −μ\nd(x ,x ) := Φ( 2 ) − Φ( 1 )\nσ σ\n1 2\n1 ∣ x −μ x −μ ∣\n= erf ( 1 )−erf ( 2 )\nσ σ\n2\n(2)\nBeing based on the concept of probability, the distance should provide a better indication of\nthe degree of closeness between two compared values. If outlier values can be a concern for the\nGower distance, the probabilistic distance should be immune to such issues by design.\nThe original Gower distance has been adapted to process ordinal attributes [3]. The treatment\nof ordinal attributes is straightforward with the probabilistic distance: the ordinal outcomes can be\narranged into bins. After scaling, the bin representation approximates a probability mass function\n2",
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "page": 4,
+      "table": [
+        [
+          "PROBABILISTIC ALTERNATIVE TO THE GOWER DISTANCE\nas shown in Fig. 2. The probabilistic distance is derived again as the probability of outcomes in\nthe interval corresponding to the two compared outcomes.",
+          null,
+          null
+        ],
+        [
+          "",
+          "p(x)\nc1 c2",
+          ""
+        ],
+        [
+          null,
+          "Figure 2: Area corresponding to the probabilistic distance between two ordinal\noutcomes",
+          null
+        ],
+        [
+          "Other variations can be derived from this concept. A simple modification consists in raising\nthe above probability distance to a power. The weight of the distance can be increased or\ndecreased by varying the power to above or below unity:\nd (x ,x ) := d2(x ,x )\nA 1 2 1 2 (3)\nor:\nd (x ,x ) := √d(x ,x )\nB 1 2 1 2 (4)\nThe probabilistic distance was conceived as a solution to a classification problem. However,\nas the Gower distance, it can be used for other applications, for instance, clustering.\nReferences\n[1] Gower, J. C. (1971). A general coefficient of similarity and some of its properties. Biometrics,\n857-871.\n[2] Alb, C. (2021). Collapsing the Decision Tree: the Concurrent Data Predictor. arXiv preprint\narXiv:2108.03887. https://doi.org/10.13140/RG.2.2.33413.06880\n[3] Podani, J. (1999). Extending Gower's general coefficient of similarity to ordinal characters.\nTaxon, 48(2), 331-340.\n3",
+          null,
+          null
+        ]
+      ]
+    }
+  ]
+}
