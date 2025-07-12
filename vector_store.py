@@ -1,5 +1,5 @@
 # vector_store.py
-
+    
 import faiss
 import os
 import json
