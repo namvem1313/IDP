@@ -1,6 +1,5 @@
-faiss-gpu
-numpy
-numpy-financial
+numpy==1.23.5
+numpy-financial==1.0.0
 pymupdf==1.21.1
 pypdf2==1.28.6
 scikit-learn==1.1.3
