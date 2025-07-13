@@ -104,19 +104,24 @@ if query_type == "Direct Section Lookup":
             render_image_item(content[idx - 1], title_prefix=selected_key)
 
         elif selected_key.startswith("tables") and isinstance(content, list):
-            idx = st.number_input("🔍 Index", min_value=1, max_value=len(content), value=1)
-            table_item = content[idx - 1]
-            st.markdown(f"**📄 Page:** {table_item.get('page', 'N/A')}")
-
-            # Try to render the table
-            table_data = table_item.get("table")
-            if isinstance(table_data, list) and all(isinstance(row, list) for row in table_data):
-                import pandas as pd
-                df = pd.DataFrame(table_data[1:], columns=table_data[0])
-                st.dataframe(df)
+            if len(content) == 0:
+                st.info(f"❌ No items found under '{selected_key}'")
             else:
-                st.warning("⚠️ Unable to parse table format. Showing raw data:")
-                st.write(table_data)
+                idx = st.number_input("🔍 Index", min_value=1, max_value=len(content), value=1)
+                print(idx)
+                print(content)
+                table_item = content[idx - 1]
+                st.markdown(f"**📄 Page:** {table_item.get('page', 'N/A')}")
+
+                # Try to render the table
+                table_data = table_item.get("table")
+                if isinstance(table_data, list) and all(isinstance(row, list) for row in table_data):
+                    import pandas as pd
+                    df = pd.DataFrame(table_data[1:], columns=table_data[0])
+                    st.dataframe(df)
+                else:
+                    st.warning("⚠️ Unable to parse table format. Showing raw data:")
+                    st.write(table_data)
 
         elif isinstance(content, list):
             idx = st.number_input("🔍 Index", min_value=1, max_value=len(content), value=1)
